@@ -25,8 +25,9 @@ export const resolvers = {
     },
     User: {
         async tanks(parent){
-            const owner = Tank.findOne(parent._id);
-            console.log(owner);
+            //console.log("Parent ID:", parent._id);
+            const owner = await Tank.find({ owner: parent._id });
+            //console.log("Tanks:", owner);
             return owner
         }
     },
