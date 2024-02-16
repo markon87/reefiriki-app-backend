@@ -3,7 +3,8 @@ import { model, Schema } from 'mongoose';
 const tankSchema = new Schema({
     name: String,
     size: Number,
-    owner: String
+    owner: String,
+    stocking: [String]
 })
 
 

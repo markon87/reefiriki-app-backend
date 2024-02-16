@@ -13,17 +13,30 @@ export const typeDefs = `#graphql
         name: String!
         size: Int!
         owner: User
-        fish: [Fish!]
+        stocking: [Fish!]
     }
     type Fish {
         id: ID!
         name: String!
+        family: FishFamily!
         careLevel: String!
         temperament: String!
         diet: String!
         reefCompatibility: Boolean!
         maxSize: Float!
         minTankSize: Int!
+    }
+    type FishFamily {
+        id: ID!
+        name: String!
+        fish: [Fish!]
+    }
+    type CompatibilityChart{
+        id: ID!
+        family: FishFamily!
+        compatible: [String!]
+        notCompatible: [String!]
+        cautionRequired: [String!]
     }
 
     input UserInput {
@@ -35,21 +48,37 @@ export const typeDefs = `#graphql
     input EditUserInput {
         name: String
         password: String
-        tanks: [String]    
+        tanks: [String!]    
     }
     input TankInput{
         name: String
         size: Int 
         owner: String
+        stocking: [String!]
     }
     input FishInput{
-        name: String
-        careLevel: String
-        temperament: String
-        diet: String
-        reefCompatibility: Boolean
-        maxSize: Float
-        minTankSize: Int
+        name: String!
+        family: String!
+        careLevel: String!
+        temperament: String!
+        diet: String!
+        reefCompatibility: Boolean!
+        maxSize: Float!
+        minTankSize: Int!
+    }
+    input CompatibilityChartInput{
+        family: String!
+        compatible: [String!]
+        notCompatible: [String!]
+        cautionRequired: [String!]
+    }
+    input FishFamilyInput{
+        name: String!
+        fish: [String!]
+    }
+    input EditFishFamilyInput{
+        name: String!
+        fish: [String!]
     }
 
     type Query {
@@ -61,6 +90,11 @@ export const typeDefs = `#graphql
         
         getFishes: [Fish!]!
         getFish(ID: ID): Fish!
+
+        getFishFamilies: [FishFamily!]!
+        getFishFamily(ID: ID): FishFamily!
+
+        getCompatibility(ID: ID): CompatibilityChart!
     }
     type Mutation {
         createUser(userInput: UserInput ): User!
@@ -72,5 +106,10 @@ export const typeDefs = `#graphql
         
         createFish(fishInput: FishInput ): Fish!
         deleteFish(ID: ID!): Boolean
+
+        createCompatibilityChart(compatibilityChartInput: CompatibilityChartInput ): Boolean
+
+        createFishFamily(fishFamilyInput: FishFamilyInput ): Boolean
+        editFishFamily(ID: ID!, editFishFamilyInput: EditFishFamilyInput ): Boolean
     }
 `
