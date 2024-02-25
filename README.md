@@ -1,27 +1,29 @@
-Reefiriki GraphQL API
-Reefiriki is a blazing-fast GraphQL API that leverages Node.js and MongoDB. It provides a flexible and efficient way to interact with your data. Whether you’re building a web application, mobile app, or any other service, Reefiriki has got you covered.
+<h1>Reefiriki GraphQL API</h1>
+<p>Reefiriki is a blazing-fast GraphQL API that leverages Node.js and MongoDB. It provides a flexible and efficient way to interact with your data. Whether you’re building a web application, mobile app, or any other service, Reefiriki has got you covered.</p>
 
-Features
-GraphQL Queries and Mutations: Reefiriki supports powerful queries and mutations, allowing you to retrieve and manipulate data with ease.
-Fastify Integration: We’ve chosen Fastify as our server framework for its exceptional performance and developer-friendly features.
-MongoDB Backend: Reefiriki seamlessly connects to your MongoDB database, making it simple to store and retrieve data.
-Getting Started
-Clone the Repository:
-git clone https://github.com/markon87/reefiriki-app-backend.git
+<h2>Features</h2>
+<p><strong>GraphQL Queries and Mutations:</strong> Reefiriki supports powerful queries and mutations, allowing you to retrieve and manipulate data with ease.</p>
+<p><strong>Fastify Integration:</strong> We’ve chosen Fastify as our server framework for its exceptional performance and developer-friendly features.</p>
+<p><strong>MongoDB Backend:</strong> Reefiriki seamlessly connects to your MongoDB database, making it simple to store and retrieve data.</p>
 
-Install Dependencies:
-cd reefiriki-app-backend
-npm install
+<h3>Getting Started</h3>
+<p>Clone the Repository:</p>
+<code>git clone https://github.com/markon87/reefiriki-app-backend.git</code>
 
-Configure Environment Variables: Create a .env file with the necessary configuration (e.g., MongoDB connection string, API keys).
-Start the Server:
-npm start
+<h3>Install Dependencies:</h3>
+<code>cd reefiriki-app-backend
+npm install</code>
 
-Explore the API: Open your browser and navigate to http://localhost:4000. You’ll find the GraphQL Playground where you can test queries and mutations.
-Contributing
-We welcome contributions! If you’d like to enhance Reefiriki or fix any issues, feel free to submit a pull request.
+<p><strong>Configure Environment Variables:</strong> Create a .env file with the necessary configuration (e.g., MongoDB connection string, API keys).</p>
+<p>Start the Server:</p>
+<code>npm start</code>
 
-License
-Reefiriki is open-source software licensed under the MIT License.
+<p><strong>Explore the API: Open your browser and navigate to http://localhost:4000. You’ll find the GraphQL Playground where you can test queries and mutations.</p>
 
-Feel free to customize this template to match your project specifics. Happy coding! 🚀
+<h3>Contributing</h3>
+<p>We welcome contributions! If you’d like to enhance Reefiriki or fix any issues, feel free to submit a pull request.</p>
+
+<h3>License</h3>
+<p>Reefiriki is open-source software licensed under the MIT License.</p>
+
+<p>Feel free to customize this template to match your project specifics. Happy coding! 🚀</p>
