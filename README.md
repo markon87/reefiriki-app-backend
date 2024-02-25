@@ -7,16 +7,16 @@
 <p><strong>MongoDB Backend:</strong> Reefiriki seamlessly connects to your MongoDB database, making it simple to store and retrieve data.</p>
 
 <h3>Getting Started</h3>
-<p>Clone the Repository:</p>
-<code>git clone https://github.com/markon87/reefiriki-app-backend.git</code>
+<p>Clone the Repository:<br/>
+<code>git clone https://github.com/markon87/reefiriki-app-backend.git</code></p>
 
 <h3>Install Dependencies:</h3>
-<code>cd reefiriki-app-backend
-npm install</code>
+<p><code>cd reefiriki-app-backend
+npm install</code></p>
 
 <p><strong>Configure Environment Variables:</strong> Create a .env file with the necessary configuration (e.g., MongoDB connection string, API keys).</p>
-<p>Start the Server:</p>
-<code>npm start</code>
+<p>Start the Server:<br/>>
+<code>npm start</code></p>
 
 <p><strong>Explore the API:</strong> Open your browser and navigate to <code>http://localhost:4000</code>. You’ll find the GraphQL Playground where you can test queries and mutations.</p>
 
