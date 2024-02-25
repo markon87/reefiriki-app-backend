@@ -18,7 +18,7 @@ npm install</code>
 <p>Start the Server:</p>
 <code>npm start</code>
 
-<p><strong>Explore the API: Open your browser and navigate to http://localhost:4000. You’ll find the GraphQL Playground where you can test queries and mutations.</p>
+<p><strong>Explore the API:</strong> Open your browser and navigate to <code>http://localhost:4000</code>. You’ll find the GraphQL Playground where you can test queries and mutations.</p>
 
 <h3>Contributing</h3>
 <p>We welcome contributions! If you’d like to enhance Reefiriki or fix any issues, feel free to submit a pull request.</p>
