@@ -21,10 +21,10 @@ const server = new ApolloServer({
 mongoose.connect(process.env.MONG_URI)
 .then(() => {
     const {url} = startStandaloneServer(server, {
-        listen: { port: process.env.PORT || 8080 }
+        listen: { port: process.env.PORT || 4000 }
     })
     console.log('🎉 connected to database successfully');
-    console.log('🚀 Server ready at port', process.env.PORT || 8080);
+    console.log('🚀 Server ready at port', process.env.PORT || 4000);
 })
 .catch((error) => {
     console.log(error);
