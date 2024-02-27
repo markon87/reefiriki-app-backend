@@ -8,7 +8,8 @@ const fishSchema = new Schema({
     diet: String,
     reefCompatibility: Boolean,
     maxSize: Number,
-    minTankSize: Number
+    minTankSize: Number,
+    imageUrl: String
 })
 
 

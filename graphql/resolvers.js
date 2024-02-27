@@ -97,7 +97,7 @@ export const resolvers = {
                 ...res._doc
             }
         },
-        async createFish(_, {fishInput: {name, family, careLevel, temperament, diet, reefCompatibility, maxSize, minTankSize }}){
+        async createFish(_, {fishInput: {name, family, careLevel, temperament, diet, reefCompatibility, maxSize, minTankSize, imageUrl }}){
             const createFish = new Fish({
                 name: name,
                 family: family,
@@ -106,7 +106,8 @@ export const resolvers = {
                 diet: diet,
                 reefCompatibility: reefCompatibility,
                 maxSize: maxSize,
-                minTankSize: minTankSize
+                minTankSize: minTankSize,
+                imageUrl: imageUrl
             });
 
             const res = await createFish.save(); // MongoDB saving
@@ -115,6 +116,10 @@ export const resolvers = {
                 id: res.id,
                 ...res._doc
             }
+        },
+        async editFish(_, {ID, editFishInput: {name, family, careLevel, temperament, diet, reefCompatibility, maxSize, minTankSize, imageUrl}}){
+            const wasEdited = (await Fish.updateOne({_id: ID}, {name, family, careLevel, temperament, diet, reefCompatibility, maxSize, minTankSize, imageUrl })).modifiedCount; // 1 if something was edited
+            return wasEdited;
         },
         async createCompatibilityChart(_, {compatibilityChartInput: { family, compatible, notCompatible, cautionRequired }}){
             const createCompatibilityChart = new CompatibilityChart({

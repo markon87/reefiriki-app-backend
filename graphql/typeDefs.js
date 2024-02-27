@@ -25,6 +25,7 @@ export const typeDefs = `#graphql
         reefCompatibility: Boolean!
         maxSize: Float!
         minTankSize: Int!
+        imageUrl: String
     }
     type FishFamily {
         id: ID!
@@ -65,6 +66,18 @@ export const typeDefs = `#graphql
         reefCompatibility: Boolean!
         maxSize: Float!
         minTankSize: Int!
+        imageUrl: String
+    }
+    input EditFishInput {
+        name: String
+        family: String
+        careLevel: String
+        temperament: String
+        diet: String
+        reefCompatibility: Boolean
+        maxSize: Float
+        minTankSize: Int
+        imageUrl: String
     }
     input CompatibilityChartInput{
         family: String!
@@ -106,6 +119,7 @@ export const typeDefs = `#graphql
         
         createFish(fishInput: FishInput ): Fish!
         deleteFish(ID: ID!): Boolean
+        editFish(ID: ID!, editFishInput: EditFishInput): Boolean
 
         createCompatibilityChart(compatibilityChartInput: CompatibilityChartInput ): Boolean
 
