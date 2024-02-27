@@ -1,21 +1,21 @@
 "use strict";
 
-var _server = require("@apollo/server");
-var _standalone = require("@apollo/server/standalone");
-require("dotenv/config");
+import { ApolloServer } from "@apollo/server";
+import { startStandaloneServer } from "@apollo/server/standalone";
+import "dotenv/config";
 var _mongoose = _interopRequireDefault(require("mongoose"));
-var _typeDefs = require("./graphql/typeDefs.js");
-var _resolvers = require("./graphql/resolvers.js");
+import { typeDefs as __typeDefs } from "./graphql/typeDefs.js";
+import { resolvers as __resolvers } from "./graphql/resolvers.js";
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { "default": obj }; }
 // Apollo Server
-var server = new _server.ApolloServer({
-  typeDefs: _typeDefs.typeDefs,
-  resolvers: _resolvers.resolvers
+var server = new ApolloServer({
+  typeDefs: __typeDefs,
+  resolvers: __resolvers
 });
 
 // // connect to db
 _mongoose["default"].connect(process.env.MONG_URI).then(function () {
-  var _startStandaloneServe = (0, _standalone.startStandaloneServer)(server, {
+  var _startStandaloneServe = (0, startStandaloneServer)(server, {
       listen: {
         port: process.env.PORT || 4000
       }
