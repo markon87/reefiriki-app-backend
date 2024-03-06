@@ -1,4 +1,3 @@
-
 export const typeDefs = `#graphql
     type User {
         id: ID!
@@ -22,7 +21,7 @@ export const typeDefs = `#graphql
         careLevel: String!
         temperament: String!
         diet: String!
-        reefCompatibility: Boolean!
+        reefCompatibility: String!
         maxSize: Float!
         minTankSize: Int!
         imageUrl: String
@@ -63,7 +62,7 @@ export const typeDefs = `#graphql
         careLevel: String!
         temperament: String!
         diet: String!
-        reefCompatibility: Boolean!
+        reefCompatibility: String!
         maxSize: Float!
         minTankSize: Int!
         imageUrl: String
@@ -74,7 +73,7 @@ export const typeDefs = `#graphql
         careLevel: String
         temperament: String
         diet: String
-        reefCompatibility: Boolean
+        reefCompatibility: String
         maxSize: Float
         minTankSize: Int
         imageUrl: String
@@ -126,4 +125,4 @@ export const typeDefs = `#graphql
         createFishFamily(fishFamilyInput: FishFamilyInput ): Boolean
         editFishFamily(ID: ID!, editFishFamilyInput: EditFishFamilyInput ): Boolean
     }
-`
+`;
