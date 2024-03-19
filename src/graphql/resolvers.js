@@ -7,7 +7,7 @@ import CompatibilityChart from "../models/compatibilityChart.js";
 import { ApolloError } from "apollo-server-errors";
 import bcrypt from "bcryptjs";
 import jwt from "jsonwebtoken";
-import "dotenv/config";
+import "dotenv/config.js";
 
 export const resolvers = {
   Query: {
@@ -64,9 +64,20 @@ export const resolvers = {
     },
   },
   Mutation: {
-    async registerUser(_, { registerInput: { username, email, password } }) {
+    async registerUser(
+      _,
+      { registerInput: { username, email, password, confirmPassword } }
+    ) {
       // See if an old user exists whit email attempting to register
       const oldUser = await User.findOne({ email });
+
+      //Throw error if password and confirmed passwords are not the same
+      if (password !== confirmPassword) {
+        throw new ApolloError(
+          "Passwords are not the same",
+          "PASSWORDS_NOT_SAME"
+        );
+      }
 
       // Throw error if that user exists
       if (oldUser) {
