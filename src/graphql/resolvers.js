@@ -64,9 +64,20 @@ export const resolvers = {
     },
   },
   Mutation: {
-    async registerUser(_, { registerInput: { username, email, password } }) {
+    async registerUser(
+      _,
+      { registerInput: { username, email, password, confirmPassword } }
+    ) {
       // See if an old user exists whit email attempting to register
       const oldUser = await User.findOne({ email });
+
+      // Throw error if password and confirmed password are not the same
+      if (password !== confirmPassword) {
+        throw new ApolloError(
+          "Passwords are not the same",
+          "PASSWORDS_NOT_SAME"
+        );
+      }
 
       // Throw error if that user exists
       if (oldUser) {
@@ -89,7 +100,7 @@ export const resolvers = {
       // Create our JWT (attach to out User model)
       const token = jwt.sign(
         { user_id: newUser._id, email },
-        "9J3pJGD84sLtu9aQEuoi9opgXfOubJoeRWRxBddL6e2nk3N7yw1BzDzv6j2ziHs8TZHdu9kNhBsk5LBSpBbG4zAnGZSOP00fHM1P",
+        process.env.JWT_STRING,
         {
           expiresIn: "2h",
         }
@@ -114,7 +125,7 @@ export const resolvers = {
         // Create a NEW token
         const token = jwt.sign(
           { user_id: newUser._id, email },
-          "9J3pJGD84sLtu9aQEuoi9opgXfOubJoeRWRxBddL6e2nk3N7yw1BzDzv6j2ziHs8TZHdu9kNhBsk5LBSpBbG4zAnGZSOP00fHM1P",
+          process.env.JWT_STRING,
           {
             expiresIn: "2h",
           }
