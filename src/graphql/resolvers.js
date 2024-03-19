@@ -7,7 +7,7 @@ import CompatibilityChart from "../models/compatibilityChart.js";
 import { ApolloError } from "apollo-server-errors";
 import bcrypt from "bcryptjs";
 import jwt from "jsonwebtoken";
-import "dotenv/config.js";
+import "dotenv/config";
 
 export const resolvers = {
   Query: {
