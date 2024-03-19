@@ -44,6 +44,7 @@ export const typeDefs = `#graphql
         email: String
         username: String
         password: String
+        confirmPassword: String
     }
     input EditUserInput {
         name: String
@@ -109,7 +110,7 @@ export const typeDefs = `#graphql
         getCompatibility(ID: ID): CompatibilityChart!
     }
     type Mutation {
-        createUser(userInput: UserInput ): User!
+        registerUser(userInput: UserInput ): User!
         deleteUser(ID: ID!): Boolean
         editUser(ID: ID!, editUserInput: EditUserInput): Boolean
 

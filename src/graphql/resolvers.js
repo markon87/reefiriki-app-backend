@@ -59,15 +59,19 @@ export const resolvers = {
     },
   },
   Mutation: {
-    async createUser(_, { userInput: { name, email, username, password } }) {
-      const createUser = new User({
+    async registerUser(
+      _,
+      { userInput: { name, email, username, password, confirmPassword } }
+    ) {
+      const registerUser = new User({
         name: name,
         email: email,
         username: username,
         password: password,
+        confirmPassword: confirmPassword,
       });
 
-      const res = await createUser.save(); // MongoDB saving
+      const res = await registerUser.save(); // MongoDB saving
 
       return {
         id: res.id,
