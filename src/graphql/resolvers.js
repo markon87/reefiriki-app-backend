@@ -89,7 +89,7 @@ export const resolvers = {
       // Create our JWT (attach to out User model)
       const token = jwt.sign(
         { user_id: newUser._id, email },
-        process.env.JWT_STRING,
+        "9J3pJGD84sLtu9aQEuoi9opgXfOubJoeRWRxBddL6e2nk3N7yw1BzDzv6j2ziHs8TZHdu9kNhBsk5LBSpBbG4zAnGZSOP00fHM1P",
         {
           expiresIn: "2h",
         }
@@ -114,7 +114,7 @@ export const resolvers = {
         // Create a NEW token
         const token = jwt.sign(
           { user_id: newUser._id, email },
-          process.env.JWT_STRING,
+          "9J3pJGD84sLtu9aQEuoi9opgXfOubJoeRWRxBddL6e2nk3N7yw1BzDzv6j2ziHs8TZHdu9kNhBsk5LBSpBbG4zAnGZSOP00fHM1P",
           {
             expiresIn: "2h",
           }
