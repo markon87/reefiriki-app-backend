@@ -4,6 +4,11 @@ import Fish from "../models/fish.js";
 import FishFamily from "../models/fishFamily.js";
 import CompatibilityChart from "../models/compatibilityChart.js";
 
+import { ApolloError } from "apollo-server-errors";
+import bcrypt from "bcryptjs";
+import jwt from "jsonwebtoken";
+import "dotenv/config";
+
 export const resolvers = {
   Query: {
     async getUsers(_) {
@@ -59,24 +64,73 @@ export const resolvers = {
     },
   },
   Mutation: {
-    async registerUser(
-      _,
-      { userInput: { name, email, username, password, confirmPassword } }
-    ) {
-      const registerUser = new User({
-        name: name,
-        email: email,
+    async registerUser(_, { registerInput: { username, email, password } }) {
+      // See if an old user exists whit email attempting to register
+      const oldUser = await User.findOne({ email });
+
+      // Throw error if that user exists
+      if (oldUser) {
+        throw new ApolloError(
+          "A user is already registered with the email " + email,
+          "USER_ALREADY_EXISTS"
+        );
+      }
+
+      // Encrypt password
+      let encryptedPassword = await bcrypt.hash(password, 10);
+
+      // Build out mongoose model (User)
+      const newUser = new User({
         username: username,
-        password: password,
-        confirmPassword: confirmPassword,
+        email: email.toLowerCase(),
+        password: encryptedPassword,
       });
 
-      const res = await registerUser.save(); // MongoDB saving
+      // Create our JWT (attach to out User model)
+      const token = jwt.sign(
+        { user_id: newUser._id, email },
+        process.env.JWT_STRING,
+        {
+          expiresIn: "2h",
+        }
+      );
+
+      newUser.token = token;
+
+      // Save out user in MongoDB
+      const res = await newUser.save();
 
       return {
         id: res.id,
         ...res._doc,
       };
+    },
+    async loginUser(_, { loginInput: { email, password } }) {
+      // See if a user exists with the email
+      const user = await User.findOne({ email });
+
+      // Check if entered password equals the encrypted password
+      if (user && (await bcrypt.compare(password, user.password))) {
+        // Create a NEW token
+        const token = jwt.sign(
+          { user_id: newUser._id, email },
+          process.env.JWT_STRING,
+          {
+            expiresIn: "2h",
+          }
+        );
+
+        // Attach token to user model that we found above
+        user.token = token;
+
+        return {
+          id: res.id,
+          ...res._doc,
+        };
+      } else {
+        // If user doesn't exist, return error
+        throw new ApolloError("Incorrect password", "INCORRECT_PASSWORD");
+      }
     },
     async deleteUser(_, { ID }) {
       const wasDeleted = (await User.deleteOne({ _id: ID })).deletedCount; // 1 if something was deleted

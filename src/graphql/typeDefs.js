@@ -1,11 +1,11 @@
 export const typeDefs = `#graphql
     type User {
         id: ID!
-        name: String!
-        email: String!
         username: String!
+        email: String!
         password: String!
         tanks: [Tank!]
+        token: String
     }
     type Tank {
         id: ID!
@@ -39,12 +39,15 @@ export const typeDefs = `#graphql
         cautionRequired: [String!]
     }
 
-    input UserInput {
-        name: String
-        email: String
+    input RegisterInput {
         username: String
+        email: String
         password: String
         confirmPassword: String
+    }
+    input LoginInput {
+        email: String
+        password: String
     }
     input EditUserInput {
         name: String
@@ -110,7 +113,8 @@ export const typeDefs = `#graphql
         getCompatibility(ID: ID): CompatibilityChart!
     }
     type Mutation {
-        registerUser(userInput: UserInput ): User!
+        registerUser(registerInput: RegisterInput ): User
+        loginUser(loginInput: LoginInput ): User
         deleteUser(ID: ID!): Boolean
         editUser(ID: ID!, editUserInput: EditUserInput): Boolean
 
