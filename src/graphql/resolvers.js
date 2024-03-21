@@ -6,7 +6,7 @@ import CompatibilityChart from "../models/compatibilityChart.js";
 
 import { ApolloError } from "apollo-server-errors";
 import bcrypt from "bcryptjs";
-import jwt from "jsonwebtoken";
+import { Jwt } from "jsonwebtoken";
 import "dotenv/config";
 
 export const resolvers = {
@@ -98,7 +98,7 @@ export const resolvers = {
       });
 
       // Create our JWT (attach to out User model)
-      const token = jwt.sign(
+      const token = Jwt.sign(
         { user_id: newUser._id, email },
         process.env.JWT_STRING,
         {
@@ -123,7 +123,7 @@ export const resolvers = {
       // Check if entered password equals the encrypted password
       if (user && (await bcrypt.compare(password, user.password))) {
         // Create a NEW token
-        const token = jwt.sign(
+        const token = Jwt.sign(
           { user_id: newUser._id, email },
           process.env.JWT_STRING,
           {
