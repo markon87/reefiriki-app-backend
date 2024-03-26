@@ -124,7 +124,7 @@ export const resolvers = {
       if (user && (await bcrypt.compare(password, user.password))) {
         // Create a NEW token
         const token = jwt.sign(
-          { user_id: newUser._id, email },
+          { user_id: user._id, email },
           process.env.JWT_STRING,
           {
             expiresIn: "2h",
@@ -135,8 +135,8 @@ export const resolvers = {
         user.token = token;
 
         return {
-          id: res.id,
-          ...res._doc,
+          id: user.id,
+          ...user._doc,
         };
       } else {
         // If user doesn't exist, return error
